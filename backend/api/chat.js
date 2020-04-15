@@ -29,16 +29,3 @@ module.exports = (app, http) => {
 
     return { createMessage, readChat }
 }
-
-
-/*var today = new Date();
-console.log(today);
-var dd = String(today.getDate()).padStart(2, '0');
-console.log(dd);
-var mm = String(today.getMonth() + 1).padStart(2, '0');
-console.log(mm);
-var yyyy = today.getFullYear();
-console.log(yyyy);
-
-today = mm + '/' + dd + '/' + yyyy;
-document.write(today);*/
