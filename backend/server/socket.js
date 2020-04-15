@@ -8,12 +8,15 @@ module.exports = (app, http) => {
 
     //Chat
     chat.on('connection', socket => {
-        console.log('Novo Usuário conectado!')
-        socket.emit('saudacao', 'Bem-Vindo ao Socket.io !')
+        socket.on('userconnect', message => {
+            socket.broadcast.emit('userconnect', message)
+        })
+        socket.on('userdisconnected', message => {
+            socket.broadcast.emit('userdisconnected', message)
+        })
         socket.on('chatmessage', message => {
             socket.broadcast.emit('chatmessage', message)
         })
-        socket.on('disconnect', () => console.log('Usuário desconectado!'))
     })
 
 }
