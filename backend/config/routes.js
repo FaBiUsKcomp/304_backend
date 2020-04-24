@@ -17,6 +17,10 @@ module.exports = app => {
     app.put('/user', app.api.user.updateUser)
     app.delete('/user/:id', app.api.user.deleteUser)
 
+    //CLEANING
+    app.get('/cleaning', app.api.cleaning.getAllWeek)
+    app.put('/cleaning', app.api.cleaning.updateAllWeek)
+
     //DISPENSATION
     app.get('/dispensation', app.api.dispensation.readProducts)
     app.post('/dispensation', app.api.dispensation.createProduct)
