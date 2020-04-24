@@ -5,6 +5,10 @@ const money = new Schema({
         type: Number,
         required: true
     },
+    value: {
+        type: Number,
+        required: true
+    },
     mouth: {
         type: String,
         enum: [ 
