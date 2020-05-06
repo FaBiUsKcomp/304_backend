@@ -38,5 +38,14 @@ module.exports = app => {
         return res.status(400).send(false)
     }
 
-    return { login, validate }
+    const checkUserLevel = async (req, res) => {
+        const user = { ...req.body }
+        if(!user) return res.status(400).send('Usuário inválido!')
+        const token = jwt.decode(user.token, authsecret)
+        const { admin } = await User.findOne({ _id: token._id })
+        if(admin) return res.status(200).send(true)
+        return res.status(200).send(false)
+    }
+
+    return { login, validate, checkUserLevel }
 }
