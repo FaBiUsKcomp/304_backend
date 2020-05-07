@@ -33,6 +33,9 @@ const money = new Schema({
     },
     userPayments: [{
         type: Schema.Types.ObjectId
+    }],
+    userPending: [{
+        type: Schema.Types.ObjectId
     }]
 })
 

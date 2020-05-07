@@ -10,7 +10,7 @@ module.exports = app => {
     app.post('/validate', app.api.auth.validate)
 
     //USER
-    app.route('/user').all(app.config.passport.authenticate()) //Autorization
+    //app.route('/user').all(app.config.passport.authenticate()) //Autorization
     app.get('/user', app.api.user.readUsers)
     app.get('/user/:id', app.api.user.readAUser)
     app.post('/user', app.api.user.createUser)
@@ -20,6 +20,9 @@ module.exports = app => {
     //USER LEVEL
     app.route('/checkUserLevel').all(app.config.passport.authenticate())
     app.post('/checkUserLevel', app.api.auth.checkUserLevel)
+
+    //MONEY
+    app.post('/money', app.api.money.createTableMouth)
 
     //CLEANING
     app.get('/cleaning', app.api.cleaning.getAllWeek)
