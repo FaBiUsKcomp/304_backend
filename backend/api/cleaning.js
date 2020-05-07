@@ -24,7 +24,7 @@ module.exports = (app, http) => {
             return res.status(400).send(e)
         }
 
-        await Cleaning.findOneAndUpdate({ id: 385, ...newWeek })
+        await Cleaning.findOneAndUpdate({ id: 304, ...newWeek })
             .then(week => res.status(200).send(week))
             .catch(error => res.status(500).send(error))
     }
