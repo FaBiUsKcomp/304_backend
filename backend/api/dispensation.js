@@ -26,6 +26,13 @@ module.exports = (app, http) => {
             .catch(error => res.status(500).send(error))
     }
 
+    const deleteProduct = async (req, res) => {
+        const product = { ...req.body }
+        await Product.findOneAndDelete({ _id: product._id })
+            .then(product => res.status(200).send(product))
+            .catch(error => res.status(500).send(error))
+    }
+
     const createMissingProduct = async (req, res) => {
         const productMissing = { ...req.body }
         const product = await Product.findOne({ name: productMissing.name })
@@ -40,5 +47,19 @@ module.exports = (app, http) => {
             .catch(error => res.status(500).send(error))
     }
 
-    return { createProduct, readProducts, createMissingProduct, readMissingProducts }
+    const deleteMissingProduct = async (req, res) => {
+        const missingProduct = { ...req.body }
+        await MissingProduct.findOneAndDelete({ _id: missingProduct._id })
+            .then(product => res.status(200).send(product))
+            .catch(error => res.status(500).send(error))
+    }
+
+    return { 
+        createProduct, 
+        readProducts, 
+        deleteProduct, 
+        createMissingProduct, 
+        readMissingProducts, 
+        deleteMissingProduct
+    }
 }
