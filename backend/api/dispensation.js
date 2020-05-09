@@ -4,6 +4,7 @@ const { validField } = require('./validation')
 
 module.exports = (app, http) => {
 
+    //BUG
     const createProduct = async (req, res) => {
         const product = { ...req.body }
         try {
@@ -17,7 +18,8 @@ module.exports = (app, http) => {
         if(isMatch) return res.status(400).send({ error: 'Produto já cadastrado!' })
 
         const newProduct = new Product(product)
-        return res.status(201).send(newProduct.save())
+        newProduct.save()
+        return res.status(201).send(newProduct)
     }
 
     const readProducts = async (req, res) => {
@@ -28,17 +30,20 @@ module.exports = (app, http) => {
 
     const deleteProduct = async (req, res) => {
         const product = { ...req.body }
+        console.log(object);
         await Product.findOneAndDelete({ _id: product._id })
             .then(product => res.status(200).send(product))
             .catch(error => res.status(500).send(error))
     }
 
+    //BUG
     const createMissingProduct = async (req, res) => {
         const productMissing = { ...req.body }
         const product = await Product.findOne({ name: productMissing.name })
         if(!product) return res.status(400).send({ error: 'Produto não cadastrado!' })
         const newMissingProduct = new MissingProduct(productMissing)
-        return res.status(201).send(newMissingProduct.save()) 
+        newMissingProduct.save()
+        return res.status(201).send(newMissingProduct) 
     }
 
     const readMissingProducts = async (req, res) => {
@@ -55,10 +60,10 @@ module.exports = (app, http) => {
     }
 
     return { 
-        createProduct, 
+        createProduct, //BUG
         readProducts, 
         deleteProduct, 
-        createMissingProduct, 
+        createMissingProduct, //BUG
         readMissingProducts, 
         deleteMissingProduct
     }
