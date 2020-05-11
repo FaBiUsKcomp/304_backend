@@ -31,10 +31,10 @@ module.exports = app => {
     //DISPENSATION
     app.get('/dispensation', app.api.dispensation.readProducts)
     app.post('/dispensation', app.api.dispensation.createProduct)
-    app.delete('/dispensation', app.api.dispensation.deleteProduct)
+    app.delete('/dispensation/:id', app.api.dispensation.deleteProduct)
     app.post('/dispensation/missing', app.api.dispensation.createMissingProduct)
     app.get('/dispensation/missing', app.api.dispensation.readMissingProducts)
-    app.delete('/dispensation/missing', app.api.dispensation.deleteMissingProduct)
+    app.delete('/dispensation/missing/:id', app.api.dispensation.deleteMissingProduct)
 
     //CHAT
     app.route('/chat').all(app.config.passport.authenticate())

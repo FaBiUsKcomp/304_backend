@@ -29,10 +29,13 @@ module.exports = (app, http) => {
     }
 
     const deleteProduct = async (req, res) => {
-        const product = { ...req.body }
-        console.log(object);
-        await Product.findOneAndDelete({ _id: product._id })
-            .then(product => res.status(200).send(product))
+        const productid = req.params.id
+        await Product.findOneAndDelete({ _id: productid })
+            .then(product => {
+                MissingProduct.findOneAndDelete({ _id: productid })
+                    .then(res.status(200).send(product))
+                    .catch(error => res.status(500).send(error))
+            })
             .catch(error => res.status(500).send(error))
     }
 
@@ -53,8 +56,8 @@ module.exports = (app, http) => {
     }
 
     const deleteMissingProduct = async (req, res) => {
-        const missingProduct = { ...req.body }
-        await MissingProduct.findOneAndDelete({ _id: missingProduct._id })
+        const missingProductid = req.params.id
+        await MissingProduct.findOneAndDelete({ _id: missingProductid })
             .then(product => res.status(200).send(product))
             .catch(error => res.status(500).send(error))
     }
