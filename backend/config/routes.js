@@ -29,6 +29,7 @@ module.exports = app => {
     app.put('/cleaning', app.api.cleaning.updateAllWeek)
 
     //DISPENSATION
+    app.route('/dispensation').all(app.config.passport.authenticate())
     app.get('/dispensation', app.api.dispensation.readProducts)
     app.post('/dispensation', app.api.dispensation.createProduct)
     app.delete('/dispensation/:id', app.api.dispensation.deleteProduct)
